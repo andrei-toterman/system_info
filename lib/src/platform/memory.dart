@@ -85,15 +85,11 @@ int getTotalPhysicalMemory() {
           .intValue;
       return value * 1024;
     case 'macos':
-      final pageSize = (fluent(exec('sysctl', ['-n', 'hw.pagesize']))
-            ..trim()
-            ..parseInt())
-          .intValue;
       final size = (fluent(exec('sysctl', ['-n', 'hw.memsize']))
             ..trim()
             ..parseInt())
           .intValue;
-      return size * pageSize;
+      return size;
     case 'windows':
       final data =
           wmicGetValueAsMap('ComputerSystem', ['TotalPhysicalMemory'])!;
